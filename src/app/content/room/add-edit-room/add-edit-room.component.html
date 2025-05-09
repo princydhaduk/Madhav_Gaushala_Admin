@@ -1,0 +1,265 @@
+<div
+  class="bg-white border border-slate_2 rounded-lg lg:rounded-xl 2xl:rounded-2xl py-4 lg:py-6 2xl:py-8 px-5 lg:px-7 2xl:px-9">
+  <div class="flex flex-wrap items-center mb-3 lg:mb-5 2xl:mb-7">
+    <h5 class="text24 text-dark font-bold mb-2.5 md:mb-0">Add New Room</h5>
+    <div class="w-full xs:w-auto ml-auto">
+      <div class="flex flex-wrap -mx-1.5 lg:-mx-3.5">
+        <div class="w-1/2 xs:w-auto px-1.5 lg:px-3.5" [routerLink]="'/rooms'">
+          <button class="btn-secondary w-full xs:w-auto">Cancel</button>
+        </div>
+        <div class="w-1/2 xs:w-auto px-1.5 lg:px-3.5">
+          <button class="btn-primary w-full xs:w-auto" (click)="onSubmitAction()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form class="flex flex-wrap -mx-2 2xl:-mx-3.5" #roomsNgForm="ngForm" [formGroup]="roomsForm">
+    <div class="w-full sm:w-1/2 relative md:w-1/3 lg:w-1/4 p-2 2xl:p-3.5">
+      <label class="label">Room Name <span class="text-red">*</span></label>
+      <input type="text" class="input" placeholder="Enter room name" [formControlName]="'room_name'" pInputText />
+      <span class="error-message" *ngIf="roomsForm.get('room_name').hasError('required') && (roomsForm.get('room_name').dirty || roomsForm.get('room_name').touched)"> Room Name is required.</span>
+    </div>
+    <div class="w-full sm:w-1/2 relative md:w-1/3 lg:w-1/4 p-2 2xl:p-3.5">
+      <label class="label">Room Number <span class="text-red">*</span></label>
+      <mat-form-field appearance="outline" class="w-full sel_inp">
+        <mat-select placeholder="Select room type" [formControlName]="'roomnumberids'" multiple>
+          <mat-option *ngFor="let item of roomNumberList" [value]="item._id">{{item.number}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span class="error-message" *ngIf="roomsForm.get('roomnumberids').hasError('required') && (roomsForm.get('roomnumberids').dirty || roomsForm.get('roomnumberids').touched)"> Room number is required.</span>
+    </div>
+    <!-- <div class="w-full sm:w-1/2 relative md:w-1/3 lg:w-1/4 p-2 2xl:p-3.5">
+        <label class="label">No of Rooms <span class="text-red">*</span></label>
+        <input type="text" class="input" placeholder="Enter No of Rooms" [formControlName]="'numbers_of_room'" pInputText/>
+          <span class="error-message"
+          *ngIf="roomsForm.get('numbers_of_room').hasError('required') && (roomsForm.get('numbers_of_room').dirty || roomsForm.get('numbers_of_room').touched)">
+          No. of rooms is required.</span>
+          <span class="error-message"
+          *ngIf="roomsForm.get('numbers_of_room').hasError('pattern')">
+          No. of rooms is in digit.</span>
+    </div> -->
+    <div class="w-full sm:w-1/2 relative md:w-1/3 lg:w-1/4 p-2 2xl:p-3.5">
+        <label class="label">No of Adults <span class="text-red">*</span></label>
+        <input type="text" class="input" placeholder="Enter No of adults" [formControlName]="'no_of_adults'" pInputText/>
+        <span class="error-message" *ngIf="roomsForm.get('no_of_adults').hasError('required') && (roomsForm.get('no_of_adults').dirty || roomsForm.get('no_of_adults').touched)"> No of adults is required.</span> 
+        <span class="error-message" *ngIf="roomsForm.get('no_of_adults').hasError('pattern')"> No of adults is in digit.</span>
+    </div>
+    <div class="w-full sm:w-1/2 relative md:w-1/3 lg:w-1/4 p-2 2xl:p-3.5">
+        <label class="label">No of Childs <span class="text-red">*</span></label>
+        <input type="text" class="input" placeholder="Enter No of childs" [formControlName]="'no_of_child'" pInputText/>
+        <span class="error-message" *ngIf="roomsForm.get('no_of_child').hasError('required') && (roomsForm.get('no_of_child').dirty || roomsForm.get('no_of_child').touched)"> No of childs is required.</span> 
+        <span class="error-message" *ngIf="roomsForm.get('no_of_child').hasError('pattern')"> No of childs is in digit.</span>
+    </div>
+    <div class="w-full sm:w-1/2 relative md:w-1/3 lg:w-1/4 p-2 2xl:p-3.5">
+        <label class="label">No of Extra <span class="text-red">*</span></label>
+        <input type="text" class="input" placeholder="Enter No of Extra" [formControlName]="'no_of_extra'" pInputText (change)="extraPersonValidate()" />
+        <span class="error-message" *ngIf="roomsForm.get('no_of_extra').hasError('required') && (roomsForm.get('no_of_extra').dirty || roomsForm.get('no_of_extra').touched)"> No of extra is required.</span> 
+        <span class="error-message" *ngIf="roomsForm.get('no_of_extra').hasError('pattern')"> No of extra is in digit.</span>
+    </div>
+    <div class="w-full sm:w-1/2 relative md:w-1/3 lg:w-1/4 p-2 2xl:p-3.5">
+      <label class="label">Room Size <span class="text-red">*</span></label>
+      <input type="text" class="input" placeholder="Enter Room Size" [formControlName]="'room_size'" pInputText />
+      <span class="error-message" *ngIf="roomsForm.get('room_size').hasError('required') && (roomsForm.get('room_size').dirty || roomsForm.get('room_size').touched)"> Room Size is required.</span>
+    </div>
+    <div class="w-full sm:w-1/2 relative md:w-1/3 lg:w-1/4 p-2 2xl:p-3.5">
+      <label class="label">Bed Type <span class="text-red">*</span></label>
+      <input type="text" class="input" placeholder="Enter Bed Type" [formControlName]="'bed_type'" pInputText />
+      <span class="error-message" *ngIf="roomsForm.get('bed_type').hasError('required') && (roomsForm.get('bed_type').dirty || roomsForm.get('bed_type').touched)"> Bed Type is required.</span>
+    </div>
+
+    <h4 class="w-full px-2 2xl:px-3.5 text-primary font-bold">Room Price</h4>
+    <div class="w-full flex flex-wrap">
+      <div class="w-[calc(100%-145px)]">
+        <div class="flex flex-wrap">
+          <div class="w-full sm:w-1/2 relative md:w-1/3 p-2 2xl:p-3.5">
+            <label class="label">Price <span class="text-red">*</span></label>
+            <input type="text" class="input" placeholder="₹0/Per Night" [formControlName]="'price'" pInputText (change)="calculatePrice('price')" />
+            <span class="error-message" *ngIf="roomsForm.get('price').hasError('required') && (roomsForm.get('price').dirty || roomsForm.get('price').touched)"> Price is required.</span>
+            <span class="error-message" *ngIf="roomsForm.get('price').hasError('pattern')"> Price is in digit.</span>
+          </div>
+          <div class="w-full sm:w-1/2 relative md:w-1/3 p-2 2xl:p-3.5">
+            <label class="label">GST(%) <span class="text-red">*</span></label>
+            <input type="text" class="input" placeholder="Enter GST" [formControlName]="'gst'" pInputText (change)="calculatePrice('price')" />
+            <span class="error-message" *ngIf="roomsForm.get('gst').hasError('required') && (roomsForm.get('gst').dirty || roomsForm.get('gst').touched)"> Gst is required.</span>
+            <span class="error-message" *ngIf="roomsForm.get('gst').hasError('pattern')"> Gst is in digit.</span>
+          </div>
+          <div class="w-full sm:w-1/2 relative md:w-1/3 p-2 2xl:p-3.5">
+            <label class="label">Price with GST <span class="text-red">*</span></label>
+            <input type="text" class="input" placeholder="Price with GST" [formControlName]="'pricewithgst'" pInputText />
+            <span class="error-message" *ngIf="roomsForm.get('pricewithgst').hasError('required') && (roomsForm.get('pricewithgst').dirty || roomsForm.get('pricewithgst').touched)"> Price with GST is required.</span>
+            <span class="error-message" *ngIf="roomsForm.get('pricewithgst').hasError('pattern')"> Price with GST is in digit.</span>
+          </div>
+        </div>
+      </div>
+      <div class="w-[145px] p-2 2xl:p-3.5">
+        <label class="label">Show on Website</label>
+        <p-inputSwitch [formControlName]="'show_price'"></p-inputSwitch>
+      </div>
+    </div>
+
+    <h4 class="w-full px-2 2xl:px-3.5 text-primary font-bold">Extra Price</h4>
+    <div class="w-full flex flex-wrap">
+      <div class="w-[calc(100%-145px)]">
+        <div class="flex flex-wrap">
+          <div class="w-full sm:w-1/2 relative md:w-1/3 p-2 2xl:p-3.5">
+            <label class="label">Extra Price</label>
+            <input type="text" class="input" placeholder="Extra GST" [formControlName]="'extra_price'" pInputText (change)="calculatePrice('extraprice')" />
+            <span class="error-message" *ngIf="roomsForm.get('extra_price').hasError('required') && (roomsForm.get('extra_price').dirty || roomsForm.get('extra_price').touched)"> Extra Price is required.</span>
+            <span class="error-message" *ngIf="roomsForm.get('extra_price').hasError('pattern')"> Extra Price is in digit.</span>
+          </div>
+          <div class="w-full sm:w-1/2 relative md:w-1/3 p-2 2xl:p-3.5">
+            <label class="label">Extra GST(%)</label>
+            <input type="text" class="input" placeholder="Extra GST" [formControlName]="'extra_gst'" pInputText (change)="calculatePrice('extraprice')" />
+            <span class="error-message" *ngIf="roomsForm.get('extra_gst').hasError('required') && (roomsForm.get('extra_gst').dirty || roomsForm.get('extra_gst').touched)"> Extra Gst is required.</span>
+            <span class="error-message" *ngIf="roomsForm.get('extra_gst').hasError('pattern')"> Extra Gst is in digit.</span>
+          </div>
+          <div class="w-full sm:w-1/2 relative md:w-1/3 p-2 2xl:p-3.5">
+            <label class="label">Price with Extra GST</label>
+            <input type="text" class="input" placeholder="Price with Extra GST" [formControlName]="'extra_pricewithgst'" pInputText />
+            <span class="error-message" *ngIf="roomsForm.get('extra_pricewithgst').hasError('required') && (roomsForm.get('extra_pricewithgst').dirty || roomsForm.get('extra_pricewithgst').touched)"> Price with Extra GST is required.</span>
+            <span class="error-message" *ngIf="roomsForm.get('extra_pricewithgst').hasError('pattern')"> Price with Extra GST is in digit.</span>
+          </div>
+        </div>
+      </div>
+      <div class="w-[145px] p-2 2xl:p-3.5">
+        <label class="label">Show on Website</label>
+        <p-inputSwitch [formControlName]="'show_extra_price'"></p-inputSwitch>
+      </div>
+    </div>
+
+    <h4 class="w-full px-2 2xl:px-3.5 text-primary font-bold">Breakfast Price</h4>
+    <div class="w-full flex flex-wrap">
+      <div class="w-[calc(100%-145px)]">
+        <div class="flex flex-wrap">
+          <div class="w-full sm:w-1/2 relative md:w-1/3 p-2 2xl:p-3.5">
+            <label class="label">Breakfast Price</label>
+            <input type="text" class="input" placeholder="Breakfast Price" [formControlName]="'breakfast_price'" pInputText (change)="calculatePrice('breakfastprice')" />
+            <!-- <span class="error-message" *ngIf="roomsForm.get('breakfast_price').hasError('required') && (roomsForm.get('breakfast_price').dirty || roomsForm.get('breakfast_price').touched)"> Breakfast Price is required.</span>
+            <span class="error-message" *ngIf="roomsForm.get('breakfast_price').hasError('pattern')"> Breakfast Price is in digit.</span> -->
+          </div>
+          <div class="w-full sm:w-1/2 relative md:w-1/3 p-2 2xl:p-3.5">
+            <label class="label">Breakfast GST(%)</label>
+            <input type="text" class="input" placeholder="Breakfast GST" [formControlName]="'breakfast_gst'" pInputText (change)="calculatePrice('breakfastprice')" />
+            <!-- <span class="error-message" *ngIf="roomsForm.get('breakfast_gst').hasError('required') && (roomsForm.get('breakfast_gst').dirty || roomsForm.get('breakfast_gst').touched)"> Breakfast Gst is required.</span>
+            <span class="error-message" *ngIf="roomsForm.get('breakfast_gst').hasError('pattern')"> Breakfast Gst is in digit.</span> -->
+          </div>
+          <div class="w-full sm:w-1/2 relative md:w-1/3 p-2 2xl:p-3.5">
+            <label class="label">Price with Breakfast GST</label>
+            <input type="text" class="input" placeholder="Breakfast Price with GST" [formControlName]="'breakfast_pricewithgst'" pInputText />
+            <!-- <span class="error-message" *ngIf="roomsForm.get('breakfast_pricewithgst').hasError('required') && (roomsForm.get('breakfast_pricewithgst').dirty || roomsForm.get('breakfast_pricewithgst').touched)"> Price with Breakfast GST is required.</span>
+            <span class="error-message" *ngIf="roomsForm.get('breakfast_pricewithgst').hasError('pattern')"> Price with Breakfast GST is in digit.</span> -->
+          </div>
+        </div>
+      </div>
+      <div class="w-[145px] p-2 2xl:p-3.5">
+        <label class="label">Show on Website</label>
+        <p-inputSwitch [formControlName]="'show_breakfast_price'"></p-inputSwitch>
+      </div>
+    </div>
+    
+    <div class="w-full sm:w-1/2 relative md:w-1/3 lg:w-1/4 p-2 2xl:p-3.5">
+      <label class="label">Amenities <span class="text-red">*</span></label>
+      <mat-form-field appearance="outline" class="w-full sel_inp">
+        <mat-select placeholder="Select Amenities" [formControlName]="'amenities'" multiple>
+          <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">Select All</mat-option>
+          <mat-option (click)="togglePerOne(allSelected.viewValue)" *ngFor="let item of amenitiesList" [value]="item._id">{{item.amenityname}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span class="error-message" *ngIf="roomsForm.get('amenities').hasError('required') && (roomsForm.get('amenities').dirty || roomsForm.get('amenities').touched)"> Amenities is required.</span>
+    </div>
+    <div class="w-full p-2 2xl:p-3.5">
+      <label class="label">Description</label>
+      <div class="NgxEditor__Wrapper flex flex-col h-80 overflow-y-auto border border-black/20 product_details">
+        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+        <ngx-editor formControlName="description" [editor]="editor" [disabled]="description_length > 10000" [placeholder]="'Type here...'" (input)="descriptionLength($event)">
+        </ngx-editor>
+      </div>
+    </div>
+    <div class="w-full p-2 2xl:p-3.5">
+      <label class="label">Photos & Videos<span class="text-red">*</span></label>
+      <div class="flex flex-wrap -mx-2 xl:-mx-3">
+        <div class="w-1/2 xs:w-1/3 sm:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/8)] p-2 xl:p-3">
+          <div class="w-full h-36 2xl:h-44 bg-[#F3F4F6] relative border border-dashed border-gray_1 rounded-lg lg:rounded-xl 2xl:rounded-2xl flex items-center justify-center">
+            <input type="file" [multiple]="true" (change)="uploadOtherImages($event)" [accept]=""
+              class="absolute cursor-pointer opacity-0 z-10 w-full h-full inset-0">
+            <div class="py-2 px-4 text-center" for="other_image">
+              <span class="text-22 2xl:text-28 font-medium text-gray_1 icon-export"></span>
+              <span class="text-12 md:text-14 2xl:text-16 font-medium text-gray_1 block">Upload Photo & Videos</span>
+            </div>
+          </div>
+        </div>
+        <div class="w-1/2 xs:w-1/3 sm:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/8)] p-2 xl:p-3" *ngFor="let img of OtherImages;let i= index;">
+          <div class="flex items-center flex-wrap">
+            <div class="relative rounded-md w-full h-36 2xl:h-44 overflow-hidden group">
+              <div class="absolute inset-0 z-30 bg-black/40 hidden group-hover:flex items-center justify-center">
+                <button mat-icon-button (click)="removeOtherImnages(i)">
+                  <span class="block icon-delete text-white text-xl"></span>
+                </button>
+              </div>
+              <div class="w-full h-full" *ngIf="img.type == 'IMG'">
+                <img [src]="constants.baseImageUrl + img.path" alt="" class="w-full h-full object-cover">
+              </div>
+              <div class="w-full h-full" *ngIf="img.type == 'VID'">
+                <video class="object-cover w-full h-full" controls (error)="imageOnError($event)">
+                  <source [src]="constants.baseImageUrl + img.path" class="w-full h-full object-cover">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-1/2 xs:w-1/3 sm:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-[calc(100%/8)] p-2 xl:p-3" *ngIf="OtherImages.length == 0">
+          <div class="max-w-8xl w-full h-full shadow-xl shadow-slate-100 rounded-2xl p-3 mx-auto bg-gray_2/60 flex">
+            <strong class="block text-14 md:text-18 text-center m-auto">No images/videos found..!</strong>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="w-full p-2 2xl:p-3.5">
+      <label class="label">Terms & Policy</label>
+      <div class="NgxEditor__Wrapper flex flex-col h-80 overflow-y-auto border border-black/20 product_details">
+        <ngx-editor-menu [editor]="editor2" [toolbar]="toolbar"></ngx-editor-menu>
+        <ngx-editor formControlName="terms_and_policy" [editor]="editor2" [disabled]="tremCondition_length > 10000"
+          [placeholder]="'Type here...'" (input)="termsConditionLength($event)">
+        </ngx-editor>
+      </div>
+    </div>
+    <div class="w-full sm:w-1/2 lg:w-1/3 relative p-2 2xl:p-3.5">
+      <label class="label">Meta Title </label>
+      <input type="text" pInputText [formControlName]="'meta_title'" class="input" placeholder="Enter Amenity Name" />
+    </div>
+    <div class="w-full sm:w-1/2 lg:w-1/3 relative p-2 2xl:p-3.5">
+      <label class="label">Url Slug </label>
+      <input type="text" pInputText [formControlName]="'url_slug'" class="input" placeholder="Enter Amenity Name" />
+    </div>
+    <div class="w-full sm:w-1/2 lg:w-1/3 relative p-2 2xl:p-3.5">
+      <label class="label">Canonical </label>
+      <input type="text" pInputText [formControlName]="'canonical'" class="input" placeholder="Enter Amenity Name" />
+    </div>
+    <div class="w-full sm:w-1/2 lg:w-1/3 relative p-2 2xl:p-3.5">
+      <label class="label">Og Title </label>
+      <input type="text" pInputText [formControlName]="'og_title'" class="input" placeholder="Enter Amenity Name" />
+    </div>
+    <div class="w-full sm:w-1/2 lg:w-1/3 relative p-2 2xl:p-3.5">
+      <label class="label">Og Description </label>
+      <input type="text" pInputText [formControlName]="'og_description'" class="input" placeholder="Enter Amenity Name" />
+    </div>
+    <div class="w-full sm:w-1/2 lg:w-1/3 relative p-2 2xl:p-3.5">
+      <label class="label">Og Url </label>
+      <input type="text" pInputText [formControlName]="'og_url'" class="input" placeholder="Enter Amenity Name" />
+    </div>
+    <div class="w-full sm:w-1/2 lg:w-1/3 relative p-2 2xl:p-3.5">
+      <label class="label">Og Type </label>
+      <input type="text" pInputText [formControlName]="'og_type'" class="input" placeholder="Enter Amenity Name" />
+    </div>
+    <div class="w-full sm:w-1/2 lg:w-1/3 relative p-2 2xl:p-3.5">
+      <label class="label">Og Sitename </label>
+      <input type="text" pInputText [formControlName]="'og_sitename'" class="input" placeholder="Enter Amenity Name" />
+    </div>
+    <div class="w-full sm:w-1/2 lg:w-1/3 relative p-2 2xl:p-3.5">
+      <label class="label">Meta Description </label>
+      <input type="text" pInputText [formControlName]="'meta_description'" class="input" placeholder="Enter Amenity Name" />
+    </div>
+  </form>
+</div>

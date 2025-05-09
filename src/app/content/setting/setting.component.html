@@ -1,0 +1,73 @@
+<div class="w-full bg-white border border-slate_2 px-5 py-5 xl:px-9 xl:py-8 rounded-2xl">
+  <div class="xs:flex items-center justify-between mb-3.5 md:mb-5 xl:mb-7">
+    <h2 class="text24 text-dark font-bold mb-3.5 xs:mb-0">Settings</h2>
+    <div class="w-full xs:w-auto">
+      <div class="flex -mx-2 lg:-mx-3.5">
+        <div class="w-1/2 xs:w-auto px-2 lg:px-3.5">
+          <button class="w-full btn-primary" (click)="onSubmitAction()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+   <div class="w-full mx-auto">
+      <form class="flex flex-wrap -mx-2.5"  #invoiceNgForm="ngForm" [formGroup]="settingDetailsForm">
+        <!-- <div class="w-full sm:w-1/2 relative py-1.5 lg:py-2.5 p-2.5">
+          <label class="label">AMC Amount<span class="text-red">*</span></label>
+          <input type="text" placeholder="Enter AMC Amount" [formControlName]="'amc_amount'" class="input" pInputText/>
+          <span class="text-red text-primary-error block text-sm font-semibold absolute bottom-0 inset-x-0 pt-2"
+           *ngIf="settingDetailsForm.get('amc_amount').hasError('required') && (settingDetailsForm.get('amc_amount').dirty || settingDetailsForm.get('amc_amount').touched)">
+           AMC Amount is required.</span>
+           <span class="text-red text-primary-error block text-sm font-semibold absolute bottom-0 inset-x-0 pt-2"
+           *ngIf="settingDetailsForm.get('amc_amount').hasError('pattern')">
+          Please enter amc amount in digit.</span>
+        </div> -->
+        <div class="w-full sm:w-1/2 relative py-1.5 lg:py-2.5 p-2.5">
+          <label class="label">Email<span class="text-red">*</span></label>
+          <input type="text" placeholder="Enter Email Address" class="input" [formControlName]="'email'" pInputText/>
+          <span class="text-red text-primary-error block text-sm font-semibold absolute bottom-0 inset-x-0 pt-2"
+           *ngIf="settingDetailsForm.get('email').hasError('required') && (settingDetailsForm.get('email').dirty || settingDetailsForm.get('email').touched)">
+           Email is required.</span>
+           <span class="text-red text-primary-error block text-sm font-semibold absolute bottom-0 inset-x-0 pt-2"
+           *ngIf="settingDetailsForm.get('email').hasError('pattern')">
+          Please enter valid email.</span>
+        </div>
+        <div class="w-full sm:w-1/2 relative p-2.5" #phoneF="ngForm" [formGroup]="phoneForm">
+          <label class="label">Mobile No.<span class="text-red">*</span></label>
+          <ngx-intl-tel-input 
+          class="loginTel input ph_num p-0"
+          [cssClass]="'block w-full'"
+          [ngClass]="{'tel-invalid' : ((phoneF.form.controls['phone'].value && (phoneF.form.controls['phone'].touched && phoneF.form.controls['phone'].invalid)) || (!phoneF.form.controls['phone'].value && phoneF.form.controls['phone'].hasError('required') && phoneF.form.controls['phone'].touched))}"
+          [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2,SearchCountryField.Name]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.India" [maxLength]="15" [phoneValidation]="true" [separateDialCode]="true" [numberFormat]="PhoneNumberFormat.National" name="phone" formControlName="phone"></ngx-intl-tel-input>
+          <span class="error-message" *ngIf="!phoneForm.controls['phone'].value && phoneForm.controls['phone'].hasError('required') && phoneForm.controls['phone'].touched"> Please enter phone.</span>
+        </div>
+        <div class="flex items-center flex-wrap w-full sm:w-1/2 relative">
+          <div class="w-full sm:w-1/2 relative py-1.5 lg:py-2.5 px-2.5">
+            <label class="label">GST No. </label>
+            <input type="text" placeholder="Enter GST No." class="input" [formControlName]="'gst_no'" pInputText/>
+            <span class="text-red text-primary-error block text-sm font-semibold absolute bottom-0 inset-x-0 pt-2"
+            *ngIf="settingDetailsForm.get('gst_no').hasError('required') && (settingDetailsForm.get('gst_no').dirty || settingDetailsForm.get('gst_no').touched)">
+            GST No. is required.</span>
+            <span class="text-red text-primary-error block text-sm font-semibold absolute bottom-0 inset-x-0 pt-2"
+            *ngIf="settingDetailsForm.get('gst_no').hasError('pattern')">
+           Please enter valid gst no.</span>
+          </div>
+        <div class="w-full sm:w-1/2 relative py-1.5 lg:py-2.5 p-2.5">
+          <label class="label">Address<span class="text-red">*</span></label>
+          <input type="text" placeholder="Enter Address" class="input" [formControlName]="'address'" pInputText/>
+          <span class="text-red text-primary-error block text-sm font-semibold absolute bottom-0 inset-x-0 pt-2"
+           *ngIf="settingDetailsForm.get('address').hasError('required') && (settingDetailsForm.get('address').dirty || settingDetailsForm.get('address').touched)">
+           Address is required.</span>
+        </div> 
+        </div>
+        <div class="flex items-center flex-wrap w-full relative">
+          <div class="w-full relative py-1.5 lg:py-2.5 px-2.5">
+            <label class="label">Terms and Condition </label>
+            <div class="NgxEditor__Wrapper flex flex-col h-72 overflow-y-auto border border-black/20 product_details">
+              <ngx-editor-menu [editor]="editor" [toolbar]="toolbar" class=""> </ngx-editor-menu>
+              <ngx-editor formControlName="tc" [editor]="editor" [disabled]="tAcLength > 10000" [placeholder]="'Type here...'" (ngModelChange)="termsAndConditionsLength($event)"></ngx-editor>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+ </div>

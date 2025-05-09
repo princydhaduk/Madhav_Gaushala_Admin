@@ -1,0 +1,70 @@
+<!-- Rol & Permission / Add New Role start -->
+<div class="p-5 md:p-6 lg:p-7 2xl:p-9 w-full bg-white border border-slate_2 rounded-2xl">
+    <div class="space-y-3.5 lg:space-y-5 2xl:space-y-5">
+        <div class="xs:flex items-center justify-between mb-3 md:mb-5 2xl:mb-7">
+            <h2 class="text24 text-dark font-bold mb-3.5 xs:mb-0">Role & Permission</h2>
+            <div class="flex items-center w-full xs:w-auto space-x-3.5 xl:space-x-7">
+                <button class="w-1/2 xs:w-auto px-2 sm:px-6 btn-secondary"
+                    [routerLink]="'/role-permission'">Cancel</button>
+                <button class="w-1/2 xs:w-auto px-2 sm:px-6 btn-primary" (click)="onSubmitAction()">Save</button>
+            </div>
+        </div>
+        <form class="w-full" #roleNgForm="ngForm" [formGroup]="roleForm" (ngSubmit)="onSubmitAction()">
+            <div class="w-full relative pb-4 mb-1">
+                <label class="label">Role Name <span class="text-red inline-block">*</span></label>
+                <input type="text" placeholder="Enter Role Name" class="input" [formControlName]="'name'" />
+                <span class="error-message" *ngIf="roleForm.get('name').hasError('required') && (roleForm.get('name').dirty || roleForm.get('name').touched)">Role Name is required.</span>
+            </div>
+            <div class="w-full mt-3">
+                <div class="flex items-center -mx-2.5">
+                    <h2 class="text-primary font-bold text-16 lg:text-18 2xl:text-20 p-2.5">Assign Permission</h2>
+                    <label for="all_check" class="flex items-center p-2.5 space-x-1 xs:space-x-2 ml-auto cursor-pointer">
+                        <mat-checkbox class="example-margin check_lable" [checked]="select_all" (change)="checkAllRolesList($event)">Select All</mat-checkbox>
+                    </label>
+                </div>
+                <hr class="my-4 bg-b5">
+                <div class="flex flex-wrap -mx-2.5 xl:-mx-3.5" *ngIf="isPermissionsShow && isRoleAvailable" formArrayName="permissions">
+                    <div class="w-full xs:w-1/2 lg:w-1/3 2xl:w-1/4 p-2.5 xl:p-3.5" *ngFor="let item of roleForm.get('permissions').controls; let i = index" [formGroupName]="i">
+                        <div class="p-3.5 2xl:p-5 px-3.5 2xl:px-6 border border-b5 rounded-xl 2xl:rounded-2xl">
+                            <div class="flex justify-between items-center">
+                                <span class="text-14 font-semibold text-dark">
+                                    {{ roleForm.get('permissions').controls[i].get('displayname').value }}
+                                </span>
+                                <label for="selectAll_{{i}}" class="flex items-center space-x-1.5 xs:space-x-2 ml-auto cursor-pointer">
+                                    <mat-checkbox class="example-margin check_lable" id="selectAll_{{i}}" formControlName="selectAll" (ngModelChange)="checkAllRole($event, i)">
+                                        Select All
+                                    </mat-checkbox>
+                                </label>
+                            </div>
+                            <div class="mt-2.5 -mx-2.5">
+                                <label for="view_{{i}}" class="flex items-center space-x-1 xs:space-x-2 ml-auto cursor-pointer">
+                                    <mat-checkbox class="example-margin check_lable" id="view_{{i}}" formControlName="view" (ngModelChange)="unCheckSelectAllRole($event, i)">
+                                        View
+                                    </mat-checkbox>
+                                </label>
+                                <label for="insert_{{i}}" class="flex items-center space-x-1 xs:space-x-2 ml-auto cursor-pointer">
+                                    <mat-checkbox class="example-margin check_lable" id="insert_{{i}}" formControlName="insert" (ngModelChange)="unCheckSelectAllRole($event, i)">
+                                        Add
+                                    </mat-checkbox>
+                                </label>
+                                <label for="update_{{i}}" class="flex items-center space-x-1 xs:space-x-2 ml-auto cursor-pointer">
+                                    <mat-checkbox class="example-margin check_lable" id="update_{{i}}" formControlName="update" (ngModelChange)="unCheckSelectAllRole($event, i)">
+                                        Edit
+                                    </mat-checkbox>
+                                </label>
+                                <label for="delete_{{i}}" class="flex items-center space-x-1 xs:space-x-2 ml-auto cursor-pointer">
+                                    <mat-checkbox class="example-margin check_lable" id="delete_{{i}}" formControlName="delete" (ngModelChange)="unCheckSelectAllRole($event, i)">
+                                        Delete
+                                    </mat-checkbox>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                <div class="flex flex-wrap -mx-2.5 xl:-mx-3.5" *ngIf="!isRoleAvailable" >
+                    <span class="text-28 font-semibold">Role permission not found</span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

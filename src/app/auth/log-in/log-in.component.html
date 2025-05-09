@@ -1,0 +1,49 @@
+<div class="w-full h-screen overflow-y-auto">
+  <div class="w-full h-full flex flex-wrap sm:flex-nowrap">
+    <div class="relative w-full flex items-center justify-center pt-28 lg:pt-16 py-5 px-5 bg-[#F8FAFC] order-1">
+      <div class="w-full max-w-md p-5 md:p-8 lg:p-10 rounded-3xl bg-white shadow-login_custom">
+        <div class="text-center mb-6 lg:mb-8">
+          <a href="#" class="inline-block">
+            <img src="assets/images/logo.png" class="mx-auto" alt="logo" />
+          </a>
+        </div>
+        <h2 class="text-20 lg:text-28 font-bold text-dark text-center"> Welcome Back! </h2>
+        <h4 class="text-16 lg:text-18 font-medium text-gray-400 text-center"> Login to your account </h4>
+        <form #logInNgForm="ngForm" [formGroup]="logInForm" class="w-full mt-5 md:mt-7">
+          <div class="w-full space-y-1.5 relative">
+            <label for="username" class="text-14 font-semibold">Username</label>
+            <div class="w-full pb-5">
+              <input type="text" [formControlName]="'username'" name="username" id="username" class="w-full text-14 lg:text-16 border border-light_blue text-gray_1 placeholder:text-gray_1 rounded-xl outline-none py-2.5 lg:py-3 px-4 lg:px-6" placeholder="Enter your username" />
+            </div>
+            <span class="error-message" *ngIf="logInForm.controls['username'].value && (logInForm.controls['username'].touched && logInForm.controls['username'].invalid)"> *Please enter valid username.</span>
+            <!-- <span class="error-message" *ngIf="!logInForm.controls['username'].value && logInForm.controls['username'].hasError('required') && logInForm.controls['username'].touched"> *Please enter username.</span> -->
+          </div>
+          <div class="w-full relative space-y-1.5">
+            <label for="password" class="text-14 font-semibold">Password</label>
+            <div class="relative w-full pb-5">
+              <input [type]="hidePassword ? 'password' : 'text'" [formControlName]="'password'" name="password" id="password" class="w-full text-14 lg:text-16 border border-light_blue text-gray_1 placeholder:text-gray_1 rounded-xl outline-none py-2.5 lg:py-3 px-4 lg:px-6" placeholder="Enter your Password" />
+              <mat-icon class="absolute right-4 top-1/2 -translate-y-1/2 text-gray_1" (click)="showPassword()">{{hidePassword ?
+              'visibility' : 'visibility_off'}}</mat-icon>
+            </div>
+            <span class="error-message left-5" *ngIf="logInForm.controls['password'].value && (logInForm.controls['password'].touched && logInForm.controls['password'].invalid)">*Please enter valid password.</span>
+            <span class="error-message left-5" *ngIf="!logInForm.controls['password'].value && logInForm.controls['password'].hasError('required') && logInForm.controls['password'].touched">*Please enter password.</span>
+          </div>
+          <div class="w-full pb-2 pt-5">
+            <button type="submit" class="w-full max-w-36 mx-auto flex items-center justify-center border-2 border-primary rounded-lg py-1.5 md:py-3 outline-none bg-primary hover:bg-white anim group" (click)="logIn()">
+              <span class="text-white font-semibold group-hover:text-primary anim">Login</span>
+              <span class="block" *ngIf="isBtnLoading">
+                <svg class="animate-spin -mr-1 ml-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25 stroke-white group-hover:stroke-primary anim" cx="12" cy="12" r="10" stroke-width="4"></circle>
+                  <path class="opacity-75 fill-white group-hover:fill-primary anim" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+          <!-- <div class="w-full text-center py-2">
+            <span class="text-16 font-semibold cursor-pointer" (click)="forgotPassword()">Forgot Password?</span>
+          </div> -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

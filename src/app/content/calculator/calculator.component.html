@@ -1,0 +1,25 @@
+<div class="p-6 bg-white shadow-xl rounded-md w-96">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Calculator</h2>
+
+  <!-- Display Input -->
+  <input
+    [(ngModel)]="expression"
+    placeholder="0"
+    readonly
+    class="w-full text-right text-3xl font-semibold bg-gray-100 py-4 px-4 rounded-lg border border-gray-300 focus:outline-none"
+  />
+
+  <!-- Calculator Buttons -->
+  <div class="grid grid-cols-4 gap-3 mt-4">
+    <button *ngFor="let btn of buttons" class="calc-btn" (click)="append(btn)">
+      {{ btn }}
+    </button>
+    <button class="calc-btn font-extrabold text-primary" (click)="clear()">C</button>
+    <button class="calc-btn font-extrabold text-primary col-span-2" (click)="calculate()">=</button>
+  </div>
+
+  <!-- Close Button -->
+  <div class="flex justify-end mt-4">
+    <button class="btn-primary" (click)="close()">Close</button>
+  </div>
+</div>

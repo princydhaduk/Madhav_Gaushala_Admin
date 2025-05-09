@@ -1,0 +1,42 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CowManagementComponent } from './cow-management.component';
+import { RouterModule, Routes } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule, NativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaginatorModule } from 'primeng/paginator';
+import { InputSwitchModule } from 'primeng/inputswitch';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: CowManagementComponent,
+  },
+]
+
+@NgModule({
+  declarations: [
+    CowManagementComponent
+  ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    MatTableModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatInputModule,
+    MatDatepickerModule,
+    NativeDateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    PaginatorModule,
+    InputSwitchModule
+  ]
+})
+export class CowManagementModule { }

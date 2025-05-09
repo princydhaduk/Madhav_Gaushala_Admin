@@ -1,0 +1,73 @@
+:host ::ng-deep .md-drppicker .ranges ul li button{
+  white-space:nowrap !important;
+}
+:host ::ng-deep .md-drppicker .ranges ul li button.active{
+  border-radius: 8px !important;
+  background-color: #c59d5f;
+}
+:host ::ng-deep .md-drppicker .ranges{
+  float: none !important;
+  width: 25% !important;
+  margin: 0 !important;
+}
+:host ::ng-deep .md-drppicker .calendar.left{
+  float: none !important;
+  width: 40% !important;
+  margin: 0 !important;
+}
+:host ::ng-deep .md-drppicker.ltr .calendar.right{
+  float: none !important;
+  width: 40% !important;
+  margin: 0 !important;
+}
+:host ::ng-deep .md-drppicker .buttons{
+  width: 100% !important;
+}
+:host ::ng-deep .md-drppicker.drops-down-auto.ltr.double.show-ranges.shown{
+  top: 100% !important;
+  right: 8px !important;
+  left: auto !important;
+  display: flex !important;
+  flex-wrap: wrap;
+  width: 740px !important;
+  padding: 10px !important;
+  margin-top: 0 !important;
+}
+:host ::ng-deep .buttons_input .btn.clear{
+  padding: 0px 15px !important;
+  color: #c59d5f !important;
+  margin-right: 15px !important;
+}
+:host ::ng-deep .buttons_input .btn.clear svg{
+  display: none !important;
+}
+:host ::ng-deep .md-drppicker .calendar-table{
+  padding: 10px !important;
+}
+:host ::ng-deep .md-drppicker .btn{
+  box-shadow: none !important;
+  background-color: #c59d5f;
+  line-height: 28px !important;
+  padding: 0 15px !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+  text-transform: capitalize !important;
+  letter-spacing: 0.7px !important;
+  border: 1px solid #c59d5f !important;
+}
+:host ::ng-deep .md-drppicker td.active,:host ::ng-deep  .md-drppicker td.active:hover,:host ::ng-deep .md-drppicker td.in-range.active,:host ::ng-deep .md-drppicker td.available:hover,:host ::ng-deep .md-drppicker th.available:hover,:host ::ng-deep .md-drppicker td.off.end-date{
+  background-color: #c59d5f;
+}
+:host ::ng-deep .md-drppicker td.active span,:host ::ng-deep  .md-drppicker td.in-range span,:host ::ng-deep .md-drppicker td.available:hover span,:host ::ng-deep  .md-drppicker th.available:hover span{
+  color: #fff !important;
+}
+:host ::ng-deep  .md-drppicker td.in-range{
+  background-color: #fae1af;
+}
+:host ::ng-deep .md-drppicker td{
+  opacity: 1 !important;
+}
+:host ::ng-deep .md-drppicker .btn:hover,:host ::ng-deep .md-drppicker .btn:focus{
+  background-color: #fff !important;
+  color: #c59d5f !important;
+}

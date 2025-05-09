@@ -1,0 +1,120 @@
+<div class="w-full bg-white border border-slate_2 px-5 py-5 xl:px-9 xl:py-8 rounded-2xl">
+  <div class="xs:flex items-center justify-between mb-6 md:mb-8 xl:mb-12">
+    <h2 class="text24 text-dark font-bold mb-3.5 xs:mb-0">{{userId != "adminuserId" ? "Edit" : "Add"}} Admin</h2>
+    <div class="flex items-center w-full xs:w-auto space-x-3.5 xl:space-x-7">
+      <button class="w-1/2 xs:w-auto px-2 sm:px-6 btn-secondary" [routerLink]="'/admin-user'">Cancel</button>
+      <button class="w-1/2 xs:w-auto px-2 sm:px-6 btn-primary relative" (click)="onSubmitAction()">
+        Save
+        <span class="inline-block" *ngIf="isBtnLoading">
+          <svg class="animate-spin -mr-1 ml-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"> <circle class="opacity-25 stroke-white group-hover:stroke-primary anim" cx="12" cy="12" r="10" stroke-width="4"></circle> <path class="opacity-75 fill-white group-hover:fill-primary anim" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path> </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class="w-full mx-auto">
+    <form class="flex items-start flex-wrap -mx-2.5" [formGroup]="userDataForm">
+      <div class="w-full pb-5 px-2.5 pt-0">
+        <div class="w-full max-w-[180px]">
+          <label for="student_image" class="block relative text-16 text-gray_1 font-semibold pb-2">Profile Photo <span class="text-red">*</span></label>
+          <div class="w-full relative group lg:max-w-full">
+            <div class="w-full h-full z-30 bg-black/40 backdrop-blur-sm hidden items-center justify-center rounded-3xl absolute inset-0" [ngClass]="selectedItemImg ? 'group-hover:flex' : 'hidden'">
+              <div class="flex items-center space-x-3 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10" *ngIf="selectedItemImg">
+                <div>
+                  <input type="file" name="expenses_image" id="coupon_image" class="hidden" [multiple]="false" [accept]="'image/jpeg, image/png'" (change)="uploadItemImage($event)">
+                  <label for="expenses_image" class="block cursor-pointer">
+                    <span class="icon-camera text-xl text-white"></span>
+                  </label>
+                </div>
+                <button>
+                  <!-- <span class="block icon-eye text-white font-medium text-2xl" (click)="ViewImage(selectedItemImg)"></span> -->
+                </button>
+                <button (click)="removeFillAvatar()">
+                  <span class="block icon-delete text-red font-blod text-2xl"></span>
+                </button>
+              </div>
+            </div>
+            <div class="w-full h-full flex items-center justify-center z-20"[ngClass]="{'opacity-0' : selectedItemImg}">
+              <div class="w-full">
+                <input type="file" name="expenses_image" id="expenses_image" class="hidden" [multiple]="false" [accept]="'image/avif,image/webp, image/png, image/jpeg, image/gif, image/bmp, image/vnd.microsoft.icon, image/tiff, image/svg+xml'" (change)="uploadItemImage($event)">
+                <label for="expenses_image" class="block cursor-pointer">
+                  <div class="w-full bg-white border-2 border-dashed border-t4 rounded-xl p-11 px-5 text-center">
+                    <span class="icon-user_master_fill text-3xl mr-2"></span>
+                    <span class="text18 font-medium block">Upload Logo</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div class="w-full h-full bg-gray_4 border-2 border-dashed border-primary overflow-hidden rounded-3xl absolute inset-0 z-[1] mt-0" *ngIf="selectedItemImg">
+              <img class="object-cover w-full h-full" [src]=" !isUpload ? constants.baseImageUrl + selectedItemImg : selectedItemImg">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-full sm:w-1/2 py-1.5 lg:py-2.5 p-2.5 relative">
+        <label class="label">Admin Name <span class="text-red">*</span></label>
+        <input type="text" placeholder="Enter Admin Name" class="input" [formControlName]="'name'"/>
+        <span class="error-message" *ngIf="!userDataForm.controls['name'].value && userDataForm.controls['name'].hasError('required') && userDataForm.controls['name'].touched"> Please enter name.</span>
+      </div>
+      <div class="w-full sm:w-1/2 p-2.5 relative" #phoneF="ngForm" [formGroup]="phoneForm">
+        <label class="label">Mobile Number <span class="text-red">*</span></label>
+        <ngx-intl-tel-input 
+        class="loginTel input ph_num p-0"
+        [cssClass]="'block w-full'"
+        [ngClass]="{'tel-invalid' : ((phoneF.form.controls['phone'].value && (phoneF.form.controls['phone'].touched && phoneF.form.controls['phone'].invalid)) || (!phoneF.form.controls['phone'].value && phoneF.form.controls['phone'].hasError('required') && phoneF.form.controls['phone'].touched))}"
+        [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2,SearchCountryField.Name]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.India" [maxLength]="10" [phoneValidation]="true" [separateDialCode]="true" [numberFormat]="PhoneNumberFormat.National" name="phone" formControlName="phone"></ngx-intl-tel-input>
+        <span class="error-message" *ngIf="!phoneForm.controls['phone'].value && phoneForm.controls['phone'].hasError('required') && phoneForm.controls['phone'].touched"> Please enter phone.</span>
+      </div>
+      <div class="w-full sm:w-1/2 py-1.5 lg:py-2.5 p-2.5 relative">
+        <label class="label">Email <span class="text-red">*</span></label>
+        <input type="email" placeholder="Enter Email" class="input" [formControlName]="'email'"/>
+        <span class="error-message" *ngIf="userDataForm.controls['email'].value && (userDataForm.controls['email'].touched && userDataForm.controls['email'].invalid)"> Please enter valid email.</span>
+        <span class="error-message" *ngIf="!userDataForm.controls['email'].value && userDataForm.controls['email'].hasError('required') && userDataForm.controls['email'].touched"> Please enter email.</span>
+      </div>
+      <div class="w-full sm:w-1/2 py-1.5 lg:py-2.5 p-2.5 relative">
+        <label class="label">Role <span class="text-red">*</span></label>
+        <mat-form-field appearance="outline" class="w-full sel_inp">
+          <mat-select placeholder="Select Role" [formControlName]="'roleid'">
+            <mat-option *ngFor="let item of roleList" [value]="item?._id">{{item.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span class="error-message" *ngIf="!userDataForm.controls['roleid'].value && userDataForm.controls['roleid'].hasError('required') && userDataForm.controls['roleid'].touched"> Please Select role.</span>
+      </div>
+      <div class="w-full sm:w-1/2 py-1.5 lg:py-2.5 p-2.5 relative">
+        <label class="label">Login Username <span class="text-red">*</span></label>
+        <input type="text" placeholder="Admin01" class="input"  [formControlName]="'login_username'"/>
+        <span class="error-message" *ngIf="!userDataForm.controls['login_username'].value && userDataForm.controls['login_username'].hasError('required') && userDataForm.controls['login_username'].touched"> Please enter login username.</span>
+      </div>
+      <div class="w-full sm:w-1/2 py-1.5 lg:py-2.5 p-2.5 relative">
+        <label class="label">Login Password <span class="text-red">*</span></label>
+        <div class="relative">
+          <input [type]="isPasswordView ? 'text' : 'password'" placeholder="******" class="input" [formControlName]="'password'" [ngClass]="!minLengthValid || !requiresDigitValid || !requiresUppercaseValid || !requiresLowercaseValid || !requiresSpecialCharsValid ? 'border border-red' : 'border border-slate_2'"/>
+          <span class="absolute top-1/2 -translate-y-1/2 right-6 cursor-pointer text-xl font-medium" [ngClass]="isPasswordView ? 'icon-eye' : 'icon-close_eye'" (click)="isPasswordView = !isPasswordView"></span>
+        </div>
+        <span class="error-message" *ngIf="!userDataForm.controls['password'].value && userDataForm.controls['password'].hasError('required') && userDataForm.controls['password'].touched"> Please enter login password.</span>
+      </div>
+      <!-- <span class="error-message" *ngIf="userDataForm.get('password').hasError('required') && (userDataForm.get('password').dirty || userDataForm.get('password').touched)">Password is required.</span> -->
+      <div class="relative pl-1 w-full" *ngIf="requiredValid">
+        <div class="relative left-0" [ngClass]="{ 'error-message text-green-500': minLengthValid, 'error-message text-red': !minLengthValid }" *ngIf="!minLengthValid">
+          <span [ngClass]="minLengthValid ? 'text-green-500 icon-complate' : 'text-red icon-rong'"></span>
+          <span class="block text-inherit pl-1">Must be at least 8 characters long</span>
+        </div>
+        <div class="relative left-0 pt-1" [ngClass]="{ 'error-message text-green-500': requiresDigitValid, 'error-message text-red': !requiresDigitValid }" *ngIf="!requiresDigitValid">
+          <span [ngClass]="requiresDigitValid ? 'text-green-500 icon-complate' : 'text-red icon-rong'"></span>
+          <span class="block text-inherit pl-1">Must contain at least 1 digit</span>
+        </div>
+        <div class="relative left-0 pt-1" [ngClass]="{ 'error-message text-green-500': requiresUppercaseValid, 'error-message text-red': !requiresUppercaseValid }" *ngIf="!requiresUppercaseValid">
+          <span [ngClass]="requiresUppercaseValid ? 'text-green-500 icon-complate' : 'text-red icon-rong'"></span>
+          <span class="block text-inherit pl-1">Must contain at least 1 uppercase character</span>
+        </div>
+        <div class="relative left-0 pt-1" [ngClass]="{ 'error-message text-green-500': requiresLowercaseValid, 'error-message text-red': !requiresLowercaseValid }" *ngIf="!requiresLowercaseValid">
+          <span [ngClass]="requiresLowercaseValid ? 'text-green-500 icon-complate' : 'text-red icon-rong'"></span>
+          <span class="block text-inherit pl-1">Must contain at least 1 lowercase character</span>
+        </div>
+        <div class="relative left-0 pt-1" [ngClass]="{ 'error-message text-green-500': requiresSpecialCharsValid, 'error-message text-red': !requiresSpecialCharsValid }" *ngIf="!requiresSpecialCharsValid">
+          <span [ngClass]="requiresSpecialCharsValid ? 'text-green-500 icon-complate' : 'text-red icon-rong'"></span>
+          <span class="block text-inherit pl-1">Must contain at least 1 special character</span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,178 @@
+<div class="w-full bg-white border border-slate_2 p-4 rounded-2xl">
+  <div class="flex flex-wrap items-center -mx-1.5 sm:-mx-3">
+    <div class="w-full xs:w-1/2 sm:w-1/3 2xl:w-full 2xl:max-w-[435px] py-1 xl:py-2 xs:p-1.5 sm:p-3">
+      <div class="w-full flex items-center bg-white py-1.5 xl:py-2.5 p-3 border border-slate_2 rounded-xl">
+        <label for="search" class="flex items-center justify-center cursor-pointer text-gray_1 font-semibold mr-3"><span
+            class="icon-search text-20 text-gray_1"></span></label>
+        <input type="search" name="search" id="search"
+          class="w-full bg-transparent text-14 font-medium outline-none placeholder:text-base"
+          placeholder="Search..." (keyup)="onKeySearch($event)">
+      </div>
+    </div>
+    <mat-form-field appearance="outline" class="w-full xs:w-1/2 sm:w-1/3 2xl:w-full 2xl:max-w-[435px] py-1.5 xl:py-2.5 xs:p-1.5 sm:p-3 sel_inp">
+      <mat-select placeholder="Select Status" [(ngModel)]="selStatus" name="status" (selectionChange)="filterData()">
+        <mat-option [value]="''">All</mat-option>
+        <mat-option [value]="true">Active</mat-option>
+        <mat-option [value]="false">Inactive</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- <mat-form-field appearance="outline" class="w-full xs:w-1/3 2xl:w-full 2xl:max-w-[435px] py-1.5 xl:py-2.5 p-3 sel_inp">
+      <mat-select placeholder="Select Room Type" [(ngModel)]="selRoomType" name="status" (selectionChange)="filterData()">
+        <mat-option  *ngFor="let item of roomTypeList" [value]="item._id">{{item.type || "-"}}</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+    <div class="w-full sm:w-1/3 2xl:w-full 2xl:max-w-[215px] py-1 xl:py-2 xs:p-1.5 sm:p-3 ml-auto">
+      <button type="button"
+        class="flex items-center justify-center btn-primary text-sm lg:text-base font-bold cursor-pointer w-full ml-auto xs:w-auto"
+        (click)="addEditRooms()">
+        <span class="icon-add text-20 xl:text-24 text-inherit"></span>
+        <span class="block text-inherit ml-3 whitespace-nowrap">Add Room</span>
+      </button>
+    </div>
+  </div>
+  <div class="flex flex-wrap mt-4 xl:mt-6">
+    <div class="w-full relative">
+      <div class="w-full relative overflow-hidden">
+        <div class="border-t border-gray_3 overflow-x-auto relative">
+          <table mat-table matSort [dataSource]="roomsData" class="table_border table_border_t mat-elevation-z8">
+            <!-- Category Name Column -->
+            <ng-container matColumnDef="room_name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Room Name </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold"> {{element?.room_name}} </td>
+            </ng-container>
+
+            <!-- Role Name Column -->
+            <!-- <ng-container matColumnDef="numbers_of_room">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> No. Of Rooms </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">{{element.numbers_of_room ? element.numbers_of_room : 0 }} </td>
+            </ng-container> -->
+
+            <!-- Role Name Column -->
+            <ng-container matColumnDef="no_of_adults">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> No of adults </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold"> {{element?.no_of_adults || "0"}} </td>
+            </ng-container>
+
+            <!-- Role Name Column -->
+            <ng-container matColumnDef="no_of_child">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> No of childs </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold"> {{element?.no_of_child || "0"}} </td>
+            </ng-container>
+
+            <!-- Role Name Column -->
+            <ng-container matColumnDef="room_size">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Room Size </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold"> {{element?.room_size || "-"}} </td>
+            </ng-container>
+
+            <!-- Role Name Column -->
+            <ng-container matColumnDef="bed_type">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Bed Type </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold"> {{element?.bed_type || "-"}} </td>
+            </ng-container>
+
+            <!-- Role Name Column -->
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Price </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">₹ {{(element?.price | number) || "0"}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="gst">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> GST </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">{{element?.gst || "0"}}% </td>
+            </ng-container>
+
+            <ng-container matColumnDef="pricewithgst">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Price with GST </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">₹ {{(element?.pricewithgst | number) || "0"}} </td>
+            </ng-container>
+
+            <!-- Role Name Column -->
+            <ng-container matColumnDef="extra_price">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Extra Price </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">₹ {{(element?.extra_price | number) || "0"}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="extra_gst">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Extra GST </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">{{element?.extra_gst || "0"}}% </td>
+            </ng-container>
+
+            <ng-container matColumnDef="extra_pricewithgst">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Extra Price with GST </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">₹ {{(element?.extra_pricewithgst | number) || "0"}} </td>
+            </ng-container>
+
+            <!-- Role Name Column -->
+            <ng-container matColumnDef="breakfast_price">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Breakfast Price </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">₹ {{(element?.breakfast_price | number) || "0"}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="breakfast_gst">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Breakfast GST </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">{{element?.breakfast_gst || "0"}}% </td>
+            </ng-container>
+
+            <ng-container matColumnDef="breakfast_pricewithgst">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Breakfast Price with GST </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">₹ {{(element?.breakfast_pricewithgst | number) || "0"}} </td>
+            </ng-container>
+
+            <!-- Role Name Column -->
+            <ng-container matColumnDef="amenities_names">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Amenities </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold"> {{element?.amenities_names || "-"}} </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Is Active </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">
+                <p-inputSwitch [(ngModel)]="element.status"
+                  (onChange)="changeStatusAction($event,element);"></p-inputSwitch>
+              </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Action </th>
+              <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">
+                <div class="flex items-center space-x-5">
+                  <span class="icon-edit block text-xl cursor-pointer text-dark anim"
+                    (click)="addEditRooms(element._id)"></span>
+                  <span class="block icon-delete text-xl cursor-pointer text-red anim"
+                    (click)="deleteRooms($event,element)"></span>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <div class="w-full">
+            <div class="w-full flex justify-center p-5" *ngIf="roomsData.filteredData.length == 0">
+              <div class="max-w-8xl w-full shadow-xl shadow-slate-100 rounded-2xl p-10 mx-auto bg-gray_2">
+                <strong class="block text-xl lg:text-2xl 2xl:text-2xl text-center">Room not found..!</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full items-center flex-wrap data_paginator flex justify-center mt-[-226px] pt-[250px]"
+          *ngIf="roomsData.filteredData.length>0">
+          <p-paginator [first]="1" [rows]="limit" (onPageChange)="getRoomsList($event)"
+            [totalRecords]="totalRooms" [rowsPerPageOptions]="[10, 25, 50]"></p-paginator>
+        </div>
+        <div *ngIf="isTableLoading"
+          class="absolute inset-0 w-full h-full flex items-center justify-center border border-t-0 border-gray_3 bg-gray-400/10 backdrop-blur-sm z-10">
+          <div class="flex flex-col items-center justify-center">
+            <div class="w-12 h-12 rounded-full animate-spin border-4 border-solid border-primary border-t-transparent">
+            </div>
+            <p class="block text-base font-medium pt-2">Please wait</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,145 @@
+<div class="flex justify-end">
+    <aside id="open" class="fixed inset-y-0 left-0 w-[264px] h-screen overflow-y-auto overflow-x-hidden pb-6 border-b3 -translate-x-full lg:translate-x-0 anim z-50 shadow-custom bg-white">
+        <div class="pt-4 2xl:pt-6 pb-5 xl:pb-8 2xl:pb-16 text-center">
+            <div class="flex items-center justify-between lg:justify-center pb-10 px-4 lg:px-0">
+                <a href="#" class="inline-block">
+                    <img src="assets/images/logo.png" class="mx-auto" alt="logo" />
+                </a>
+                <div
+                    class="relative w-8 h-8 flex items-center justify-center bg-primary rounded-full cursor-pointer shadow-custom_2 lg:hidden">
+                    <span class="icon-arrow_right_2 font-semibold text-white text-24 block"
+                        onclick="toggleActive('#open', '-translate-x-full');toggleActive('#cover', '-translate-x-full');"></span>
+                </div>
+            </div>
+            <div>
+                <ul>
+                    <li class="w-full">
+                        <a [routerLink]="'dashboard'" routerLinkActive="sidebar_link"
+                            class="flex items-center space-x-2 py-2 px-4 anim border-r-4 border-transparent hover:border-primary hover:bg-primary/5 group">
+                            <span class="icon-dashboard text-xl xl:text-2xl text-gray_1 group-hover:text-primary">
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" x="0" y="0" viewBox="0 0 495.398 495.398" style="enable-background:new 0 0 512 512" xml:space="preserve"><g><path d="m487.083 225.514-75.08-75.08v-86.73c0-15.682-12.708-28.391-28.413-28.391-15.669 0-28.377 12.709-28.377 28.391v29.941L299.31 37.74c-27.639-27.624-75.694-27.575-103.27.05L8.312 225.514c-11.082 11.104-11.082 29.071 0 40.158 11.087 11.101 29.089 11.101 40.172 0l187.71-187.729c6.115-6.083 16.893-6.083 22.976-.018l187.742 187.747a28.337 28.337 0 0 0 20.081 8.312c7.271 0 14.541-2.764 20.091-8.312 11.086-11.086 11.086-29.053-.001-40.158z" fill="#000000" opacity="1" data-original="#000000"></path><path d="M257.561 131.836c-5.454-5.451-14.285-5.451-19.723 0L72.712 296.913a13.977 13.977 0 0 0-4.085 9.877v120.401c0 28.253 22.908 51.16 51.16 51.16h81.754v-126.61h92.299v126.61h81.755c28.251 0 51.159-22.907 51.159-51.159V306.79c0-3.713-1.465-7.271-4.085-9.877L257.561 131.836z" fill="#000000" opacity="1" data-original="#000000"></path></g></svg> -->
+                            </span>
+                            <span class="inline-block text-14 font-semibold text-gray_1 group-hover:text-primary cursor-pointer">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="w-full">
+                        <a [routerLink]="'cow-management'" routerLinkActive="sidebar_link"
+                            class="flex items-center space-x-2 py-2 px-4 anim border-r-4 border-transparent hover:border-primary hover:bg-primary/5 group">
+                            <span class="icon-dashboard text-xl xl:text-2xl text-gray_1 group-hover:text-primary"></span>
+                            <span class="inline-block text-14 font-semibold text-gray_1 group-hover:text-primary cursor-pointer">Cow Management</span>
+                        </a>
+                    </li>
+                    <li class="w-full">
+                        <a [routerLink]="'donation'" routerLinkActive="sidebar_link"
+                            class="flex items-center space-x-2 py-2 px-4 anim border-r-4 border-transparent hover:border-primary hover:bg-primary/5 group">
+                            <span class="icon-dashboard text-xl xl:text-2xl text-gray_1 group-hover:text-primary"></span>
+                            <span class="inline-block text-14 font-semibold text-gray_1 group-hover:text-primary cursor-pointer">Donation</span>
+                        </a>
+                    </li>
+                    <li class="w-full">
+                        <a [routerLink]="'expenses'" routerLinkActive="sidebar_link"
+                            class="flex items-center space-x-2 py-2 px-4 anim border-r-4 border-transparent hover:border-primary hover:bg-primary/5 group">
+                            <span class="icon-dashboard text-xl xl:text-2xl text-gray_1 group-hover:text-primary"></span>
+                            <span class="inline-block text-14 font-semibold text-gray_1 group-hover:text-primary cursor-pointer">Expenses</span>
+                        </a>
+                    </li>
+                    <li class="w-full">
+                        <a [routerLink]="'staff'" routerLinkActive="sidebar_link"
+                            class="flex items-center space-x-2 py-2 px-4 anim border-r-4 border-transparent hover:border-primary hover:bg-primary/5 group">
+                            <span class="icon-dashboard text-xl xl:text-2xl text-gray_1 group-hover:text-primary"></span>
+                            <span class="inline-block text-14 font-semibold text-gray_1 group-hover:text-primary cursor-pointer">Staff</span>
+                        </a>
+                    </li>
+                    <li class="w-full">
+                        <a [routerLink]="'inventory'" routerLinkActive="sidebar_link"
+                            class="flex items-center space-x-2 py-2 px-4 anim border-r-4 border-transparent hover:border-primary hover:bg-primary/5 group">
+                            <span class="icon-dashboard text-xl xl:text-2xl text-gray_1 group-hover:text-primary"></span>
+                            <span class="inline-block text-14 font-semibold text-gray_1 group-hover:text-primary cursor-pointer">Inventory</span>
+                        </a>
+                    </li>
+                    <li class="w-full">
+                        <a [routerLink]="'medical-records'" routerLinkActive="sidebar_link"
+                            class="flex items-center space-x-2 py-2 px-4 anim border-r-4 border-transparent hover:border-primary hover:bg-primary/5 group">
+                            <span class="icon-dashboard text-xl xl:text-2xl text-gray_1 group-hover:text-primary"></span>
+                            <span class="inline-block text-14 font-semibold text-gray_1 group-hover:text-primary cursor-pointer">Medical Records</span>
+                        </a>
+                    </li>
+                    <!-- <li *ngFor="let menu of displayMainMenu"
+                        [ngClass]="menu.isOpen ? calculateHeight(menu) : 'h-[52px]'"
+                        class="relative overflow-hidden w-full anim">
+                        <div *ngIf="menu.routerLink === ''">
+                            <a routerLinkActive="sidebar_link" class="flex items-center py-2 px-4 border-l-4 border-transparent hover:border-primary hover:bg-primary/5 group anim"
+                                (click)="toggleMenu(menu)">
+                                <span class="icon_show {{menu.icon}} text-gray_1 group-hover:text-primary text-xl xl:text-2xl inline-block"></span>
+                                <span class="inline-block text-14 font-semibold text-gray_1 group-hover:text-primary cursor-pointer ml-2">{{menu.menuName }}</span>
+                                <span class="icon-arrow_down text-24 text-gray_1 group-hover:text-primary ml-auto anim" [ngClass]="menu.isOpen ? 'rotate-[180deg]' : 'rotate-0'"></span>
+                            </a>
+                        </div>
+
+                        <div *ngIf="menu.routerLink">
+                            <a routerLinkActive="sidebar_link" [routerLink]="menu.routerLink"
+                                class="flex items-center py-2 px-4 border-l-4 border-transparent hover:border-primary hover:bg-primary/10 group anim">
+                                <span class="icon_show {{menu.icon}} text-gray_1 group-hover:text-primary text-xl xl:text-2xl inline-block"></span>
+                                <span class="inline-block text-14 font-semibold text-gray_1 group-hover:text-primary cursor-pointer ml-2">{{ menu.menuName }}</span>
+                            </a>
+                        </div>
+
+                        Submenu
+                        <ul *ngIf="menu.isOpen"
+                            class="w-full transition-all ease-in-out duration-300 overflow-hidden cursor-pointer">
+                            <li *ngFor="let inmenu of displayMenu">
+                                <a *ngIf="menu.menuName === inmenu.menuName" routerLinkActive="sidebar_link"
+                                    [routerLink]="inmenu.routerLink"
+                                    class="flex items-center border-l-4 border-transparent hover:border-primary hover:bg-primary/10 group anim w-full text-left">
+                                    <span
+                                        class="inline-block w-full text-14 font-semibold text-gray_1 group-hover:text-primary cursor-pointer pl-12 py-2.5">
+                                        {{ inmenu.displayName }}
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <span class="w-full h-full fixed inset-0 bg-black/20 -translate-x-full z-30 lg:hidden border-r-2 border-gray-200 anim" id="cover"></span>
+    <div class="w-full lg:w-[calc(100%-264px)] h-screen overflow-y-auto overflow-hidden bg-gray_2 pl-1.5+">
+        <div>
+            <header class="w-full h-full py-4 lg:py-6 xl:py-8 px-5 xl:px-8 bg-white flex items-center justify-between md:justify-end sticky top-0 z-50">
+                <span class="icon-menu text-2xl block lg:hidden pr-3 lg:pr-0" onclick="toggleActive('#open', '-translate-x-full');toggleActive('#cover', '-translate-x-full');"></span>
+                <h2 class="text-20 lg:text-22 2xl:text-28 font-bold text-dark">{{pageTitle}}</h2>
+                <form class="w-72 xl:w-80 mr-5 ml-auto hidden md:block " autocomplete="false">
+                    <div
+                        class="w-full flex items-center bg-white rounded-full px-3 md:px-5 xl:px-6 py-1.5 xl:py-2.5 shadow-custom_2">
+                        <label for="search">
+                            <span class="block icon-search bg-white text-gray_1 text-2xl cursor-pointer"></span>
+                        </label>
+                        <input type="search" name="search" id="search"
+                            class="w-full outline-none bg-transparent text-dark placeholder:text-gray_1 pl-2.5"
+                            placeholder="Search Member" autocomplete="false">
+                    </div>
+                </form>
+                <div class="group relative z-10 ml-2.5 xl:ml-5">
+                    <div class="cursor-pointer w-8" [title]="userData?.name ? userData?.name : ''">
+                        <img [src]="userData?.profile ? constants.baseImageUrl + userData?.profile : constants.userDefaultImage" class="max-w-full" alt="profile_avatar" />
+                    </div>
+                    <ul
+                        class="min-w-36 rounded-lg bg-white space-y-1 border border-b3 absolute top-14 right-0 px-2.5 py-3 translate-y-2 invisible group-hover:visible group-hover:translate-y-0 shadow-custom_2 anim">
+                        <!-- <li class="flex items-center space-x-2 cursor-pointer">
+                            <span class="icon-edit text-16"></span>
+                            <span class="text-dark text-14 font-normal">Update Profile</span>
+                        </li> -->
+                        <li class="flex items-center space-x-2 cursor-pointer" (click)="isLogout()">
+                            <span class="icon-logout text-16 text-red"></span>
+                            <span class="text-dark text-14 font-normal">Logout</span>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <div class="px-5 xl:px-8 py-4 lg:py-6 xl:py-8">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
