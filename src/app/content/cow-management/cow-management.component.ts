@@ -10,6 +10,7 @@ import { GlobalFunctions } from '../../common/global-function';
 import { ToastrService } from 'ngx-toastr';
 import { im } from 'mathjs';
 import { CowManagementService } from './cow-management.service';
+import { AddEditCowComponent } from './add-edit-cow/add-edit-cow.component';
 
 
 export interface adminElement {
@@ -86,13 +87,36 @@ export class CowManagementComponent implements OnInit {
   }
 
   addAdmin() {
-    this._router.navigate(['admin-user/', 'adminuserId']);
+    // this._router.navigate(['admin-user/', 'adminuserId']);
+      const dialogRef = this.dialog.open(AddEditCowComponent, {
+      width: '700px',
+      data: [{ result: null },
+      { btnName: "Add" }
+      ],
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      this.getAdminList();
+    });
   }
 
-  editAdmin(event: any, resData: any) {
-    //  event.stopPropagation();
-    this._router.navigate(['admin-user/', resData?.id]);
+   editAdmin(resData: any) {
+      const dialogRef = this.dialog.open(AddEditCowComponent, {
+      width: '700px',
+      data: [{ result: resData },
+      { btnName: "Add" }
+      ],
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      this.getAdminList();
+    });
   }
+
+  // editAdmin(event: any, resData: any) {
+  //   //  event.stopPropagation();
+  //   this._router.navigate(['admin-user/', resData?.id]);
+  // }
 
   statusChangeAdmin(resData: any) {
     const dialogRef = this.dialog.open(CommonModalComponent, {
@@ -132,7 +156,7 @@ export class CowManagementComponent implements OnInit {
     });
   }
 
-  deleteAdmin() {
+  deleteAdmin(resData: any) {
     const dialogRef = this.dialog.open(CommonModalComponent, {
       width: '530px',
       data: {

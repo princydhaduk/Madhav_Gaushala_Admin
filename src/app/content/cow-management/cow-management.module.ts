@@ -11,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { AddEditCowComponent } from './add-edit-cow/add-edit-cow.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    CowManagementComponent
+    CowManagementComponent,
+    AddEditCowComponent
   ],
   imports: [
     CommonModule,
