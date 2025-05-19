@@ -64,6 +64,18 @@ a.sidebar_link .icon_hide{@apply hidden;}
 a.sidebar_link span{@apply text-primary;}
 .report_list.active{@apply bg-primary/5 text-primary anim;}
 
+.nav_link{@apply flex items-center space-x-2.5 py-2 px-4 anim border-r-4 border-transparent hover:border-primary hover:bg-primary/5;}
+.side_bar.active aside ul .nav_link span:last-child {@apply lg:invisible lg:w-0 lg:overflow-hidden;}
+.side_bar.active aside {@apply lg:w-[92px];}
+.side_bar.active aside .logo:nth-child(2){@apply block;}
+.side_bar.active aside ul .nav_link:first-child{@apply justify-center;}
+.side_bar.active .main { @apply lg:w-[calc(100%-92px)];}
+.side_bar.active .logo {@apply lg:invisible;}
+.side_bar.active aside ul .nav_link {@apply lg:pl-3;}
+.side_bar.active aside ul a.nav_link .drop_down {@apply lg:invisible lg:w-0 lg:overflow-hidden;}
+.side_bar.active aside ul .nav_link.title_menu span:nth-child(2) {@apply lg:invisible lg:w-0 lg:overflow-hidden;}
+.side_bar.active .title_menu.active + ul.drop_down{@apply lg:hidden;}s
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

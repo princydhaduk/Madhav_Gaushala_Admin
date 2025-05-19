@@ -25,8 +25,56 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-checkmark:before {
+.icon-filter:before {
+  content: "\e902";
+}
+.icon-celender:before {
+  content: "\e903";
+}
+.icon-true:before {
+  content: "\e904";
+}
+.icon-sent:before {
+  content: "\e90a";
+}
+.icon-copy:before {
+  content: "\e914";
+}
+.icon-cow:before {
+  content: "\e916";
+}
+.icon-gallery:before {
+  content: "\e917";
+}
+.icon-true_fill:before {
+  content: "\e918";
+}
+.icon-close_fill:before {
+  content: "\e919";
+}
+.icon-event:before {
+  content: "\e91a";
+}
+.icon-medical:before {
+  content: "\e91b";
+}
+.icon-inventory:before {
+  content: "\e91f";
+}
+.icon-staff:before {
+  content: "\e920";
+}
+.icon-expenses:before {
+  content: "\e923";
+}
+.icon-donation:before {
+  content: "\e924";
+}
+.icon-home:before {
   content: "\e928";
+}
+.icon-cow_mangment:before {
+  content: "\e929";
 }
 .icon-close_eye:before {
   content: "\e927";
@@ -53,9 +101,6 @@
 .icon-menu:before {
   content: "\e90b";
 }
-.icon-bank_fill:before {
-  content: "\e902";
-}
 .icon-arrow_right_2:before {
   content: "\e907";
 }
@@ -64,12 +109,6 @@
 }
 .icon-close:before {
   content: "\e901";
-}
-.icon-utility_fill:before {
-  content: "\e903";
-}
-.icon-calendar_unfill:before {
-  content: "\e904";
 }
 .icon-arrow_down:before {
   content: "\e905";
@@ -83,50 +122,14 @@
 .icon-clock_unfill:before {
   content: "\e909";
 }
-.icon-document_fill:before {
-  content: "\e90a";
-}
-.icon-document_upload_fill:before {
-  content: "\e90c";
-}
-.icon-dollar_circle_fill:before {
-  content: "\e90d";
-}
 .icon-edit:before {
   content: "\e90e";
-}
-.icon-payment_fill:before {
-  content: "\e910";
 }
 .icon-user_master_fill:before {
   content: "\e912";
 }
-.icon-reports_fill:before {
-  content: "\e913";
-}
-.icon-festival_list:before {
-  content: "\e914";
-}
 .icon-dashboard:before {
   content: "\e915";
-}
-.icon-calc_fill:before {
-  content: "\e916";
-}
-.icon-messages_fill:before {
-  content: "\e917";
-}
-.icon-money_send:before {
-  content: "\e918";
-}
-.icon-role_fill:before {
-  content: "\e919";
-}
-.icon-member_fill:before {
-  content: "\e91a";
-}
-.icon-profile_delete:before {
-  content: "\e91b";
 }
 .icon-search:before {
   content: "\e91c";
@@ -134,18 +137,6 @@
 .icon-sms_1:before {
   content: "\e91d";
 }
-.icon-sms_fill:before {
-  content: "\e91f";
-}
-.icon-amenities_fill:before {
-  content: "\e920";
-}
 .icon-delete:before {
   content: "\e921";
-}
-.icon-user_square:before {
-  content: "\e923";
-}
-.icon-add_payment_fill:before {
-  content: "\e924";
 }
