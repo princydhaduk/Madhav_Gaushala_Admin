@@ -8,7 +8,6 @@ import { MatSort } from '@angular/material/sort';
 import { Paginator } from 'primeng/paginator';
 import { GlobalFunctions } from '../../common/global-function';
 import { ToastrService } from 'ngx-toastr';
-import { im } from 'mathjs';
 import { CowManagementService } from './cow-management.service';
 import { AddEditCowComponent } from './add-edit-cow/add-edit-cow.component';
 

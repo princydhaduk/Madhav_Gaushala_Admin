@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { AddEditCowComponent } from './add-edit-cow/add-edit-cow.component';
+import { ImageModule } from 'primeng/image';
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     PaginatorModule,
-    InputSwitchModule
+    InputSwitchModule,
+    ImageModule
   ]
 })
 export class CowManagementModule { }

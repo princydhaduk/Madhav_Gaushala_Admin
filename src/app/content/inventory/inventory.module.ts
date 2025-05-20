@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InventoryComponent } from './inventory.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AddEditInventoryComponent } from './add-edit-inventory/add-edit-inventory.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    InventoryComponent
+    InventoryComponent,
+    AddEditInventoryComponent
   ],
   imports: [
     CommonModule,

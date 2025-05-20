@@ -9,6 +9,7 @@ import { Paginator } from 'primeng/paginator';
 import { GlobalFunctions } from '../../common/global-function';
 import { ToastrService } from 'ngx-toastr';
 import { CowManagementService } from '../cow-management/cow-management.service';
+import { AddEditExpenseComponent } from './add-edit-expense/add-edit-expense.component';
 
 export interface adminElement {
   admin_name: any;
@@ -85,29 +86,29 @@ export class ExpensesComponent implements OnInit{
 
   addAdmin() {
     // this._router.navigate(['admin-user/', 'adminuserId']);
-    //   const dialogRef = this.dialog.open(AddEditCowComponent, {
-    //   width: '700px',
-    //   data: [{ result: null },
-    //   { btnName: "Add" }
-    //   ],
-    //   disableClose: true
-    // });
-    // dialogRef.afterClosed().subscribe((res) => {
-    //   this.getAdminList();
-    // });
+      const dialogRef = this.dialog.open(AddEditExpenseComponent, {
+      width: '700px',
+      data: [{ result: null },
+      { btnName: "Add" }
+      ],
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      this.getAdminList();
+    });
   }
 
    editAdmin(resData: any) {
-    //   const dialogRef = this.dialog.open(AddEditCowComponent, {
-    //   width: '700px',
-    //   data: [{ result: resData },
-    //   { btnName: "Add" }
-    //   ],
-    //   disableClose: true
-    // });
-    // dialogRef.afterClosed().subscribe((res) => {
-    //   this.getAdminList();
-    // });
+      const dialogRef = this.dialog.open(AddEditExpenseComponent, {
+      width: '700px',
+      data: [{ result: resData },
+      { btnName: "Add" }
+      ],
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      this.getAdminList();
+    });
   }
 
   // editAdmin(event: any, resData: any) {
@@ -120,7 +121,7 @@ export class ExpensesComponent implements OnInit{
       width: '530px',
       data: {
         title: 'Conformation',
-        message: 'Are You Sure You Want To Change the Staus? ',
+        message: 'Are You Sure You Want To Change the Staus?',
         buttonNames: [{ firstBtn: "Update", secondBtn: 'Cancle' }]
       }
     });
