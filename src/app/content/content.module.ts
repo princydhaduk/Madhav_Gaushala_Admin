@@ -65,6 +65,11 @@ const routes: Routes = [
     data: { title: 'Medical Records' }
   },
   {
+    path:'event',
+    loadChildren: () => import('./event/event.module').then(m=>m.EventModule),
+    data: { title: 'Events' }
+  },
+  {
     path:'rooms',
     loadChildren: () => import('./room/room.module').then(m=>m.RoomModule),
     data: { title: 'Rooms' }

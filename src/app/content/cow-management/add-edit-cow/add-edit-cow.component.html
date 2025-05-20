@@ -8,13 +8,13 @@
             <div class="w-full sm:w-7/12 order-2 sm:order-1 p-2">
                 <div class="p-1.5">
                     <label class="label">Cow Name</label>
-                    <input type="text" class="input" placeholder="Enter Text Here" formControlName="'cowName'"/>
+                    <input type="text" class="input" placeholder="Enter Text Here" formControlName="cowName"/>
                 </div>
                 <div class="p-1.5">
                     <label class="label">Cow Type</label>
                     <!-- <input type="text" class="input" placeholder="Enter Text Here" formControlName="'cowType'"/> -->
                      <mat-form-field appearance="outline" class="w-full sel_inp">
-                        <mat-select placeholder="Cow Type">
+                        <mat-select placeholder="Cow Type" formControlName="cowType">
                             <mat-option [value]="'Indigenous'">Indigenous</mat-option>
                             <mat-option [value]="'Crossbreed'">Crossbreed</mat-option>
                             <mat-option [value]="'Gir'">Gir</mat-option>
@@ -27,7 +27,7 @@
                     <label class="label">Health Status</label>
                     <!-- <input type="text" class="input" placeholder="Enter Text Here" formControlName="'healthStatus'"/> -->
                      <mat-form-field appearance="outline" class="w-full sel_inp">
-                        <mat-select placeholder="Cow Type">
+                        <mat-select placeholder="Health Status" formControlName="healthStatus">
                             <mat-option [value]="'Healthy'">Healthy</mat-option>
                             <mat-option [value]="'Sick'">Sick</mat-option>
                             <mat-option [value]="'Injured'">Injured</mat-option>

@@ -1,1 +1,81 @@
-<p>add-edit-event works!</p>
+<div class="fixed h-screen inset-0 bg-[#A3A3A3]/30 backdrop-blur-sm py-10 px-5 z-50 overflow-y-auto flex">
+    <div class="w-full max-w-[757px] bg-white rounded-xl py-3.5 md:py-5 xl:py-7 px-4 xl:px-6 m-auto">
+        <div class="flex items-center justify-between mb-3.5 lg:mb-5 xl:mb-7">
+            <h3 class="text-16 lg:text-18 2xl:text-20 text-black font-medium">Event Management</h3>
+            <span class="icon-close text-[18px] lg:text-[20px] xl:text-[24px] bg-[#FFF2E2] p-1 rounded-lg cursor-pointer" (click)="close()"></span>
+        </div>
+        <form class="flex flex-wrap -mx-2" [formGroup]="eventDataForm">
+            <div class="w-full sm:w-7/12 order-2 sm:order-1 p-2">
+                <div class="p-1.5">
+                    <label class="label">Event Title</label>
+                    <!-- <input type="text" class="input" placeholder="Enter Text Here"/>  -->
+                     <mat-form-field appearance="outline" class="w-full sel_inp">
+                        <mat-select placeholder="Event Title" formControlName="eventTitle">
+                            <mat-option [value]="'Event 1 '">Event 1 </mat-option>
+                            <mat-option [value]="'Event 2 '">Event 2 </mat-option>
+                            <mat-option [value]="'Event 3'">Event 3</mat-option>
+                            <mat-option [value]="'Event 4'">Event 4</mat-option>
+                            <mat-option [value]="'Event 5 '">Event 5 </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="p-1.5">
+                    <textarea type="text" rows="3" class="input" placeholder="Enter Text Here" formControlName="description"></textarea>
+                </div>
+                <div class="p-1.5">
+                    <label class="label">Date</label>
+                    <!-- <input type="text" class="input" placeholder="Enter Text Here"/>  -->
+                    <mat-form-field class="relative example-full-width w-full mt-0 date_input" appearance="outline" color="primary">
+                        <input matInput [matDatepicker]="picker" (click)="picker.open()" placeholder="Select Date" class="w-full h-full" formControlName="date"/>
+                        <span class="icon-celender absolute top-1/2 -translate-y-1/2 -right-9 text-20"></span>
+                        <span matSuffix>
+                            <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
+                        </span>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="p-1.5">
+                    <div class="flex flex-wrap -mx-1.5">
+                        <div class="w-full xs:w-1/2 p-1.5">
+                            <label class="label">Start Time</label>
+                            <input type="time" class="input" placeholder="Enter Text Here" formControlName="startTime"/>
+                        </div>
+                        <div class="w-full xs:w-1/2 p-1.5">
+                             <label class="label">End Time</label>
+                            <input type="time" class="input" placeholder="Enter Text Here" formControlName="endTime"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1.5">
+                    <label class="label">Unit</label>
+                    <!-- <input type="text" class="input" placeholder="Enter Text Here"/>  -->
+                    <mat-form-field appearance="outline" class="w-full sel_inp">
+                        <mat-select placeholder="Unit" formControlName="unit">
+                            <mat-option [value]="'kg'">kg</mat-option>
+                            <mat-option [value]="'liter'">liter</mat-option>
+                            <mat-option [value]="'packet'">packet</mat-option>
+                            <mat-option [value]="'unit'">unit</mat-option>
+                            <mat-option [value]="'box'">box</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="p-1.5">
+                    <label class="label">Location</label>
+                    <input type="text" class="input" placeholder="Enter Text Here" formControlName="location"/>
+                </div>
+            </div>
+            <div class="w-full sm:w-5/12 order-1 sm:order-2 p-2">
+                <div class="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 xl:w-36 xl:h-36 mx-auto rounded-full border border-[#E1E2E9] bg-[#F4F5FA] relative flex items-center justify-center mb-3.5 lg:mb-6 xl:mb-8 2xl:mb-10">
+                    <input type="file" class="w-full absolute h-full inset-0 opacity-0 z-10"/>
+                    <span class="icon-gallery text-[30px] lg:text-[40px] xl:text-[50px] 2xl:text-[60px] text-[#A6A8B1]"></span>
+                </div>
+                <h3 class="text-16 lg:text-18 xl:text-20 text-black font-medium text-center">Upload Photo</h3>
+                <p class="text-12 md:text-14 text-black/30 font-normal mt-1.5 md:mt-3 text-center mx-auto max-w-56 sm:max-w-full">Add a clear photo for better identification and record-keeping.</p>
+            </div>
+        </form>
+        <div class="flex items-center justify-center mt-3 sm:mt-4 lg:mt-6 xl:mt-8 2xl:mt-10 space-x-4 md:space-x-6 lg:space-x-8 xl:space-x-10">
+            <button class="btn-secondary w-full max-w-[180px] bg-transparent border border-primary text-primary hover:bg-primary hover:text-white" (click)="close()">Cancel</button>
+            <button class="btn-primary w-full max-w-[180px]" (click)="onSubmit()">Add</button>
+        </div>
+    </div>
+</div>

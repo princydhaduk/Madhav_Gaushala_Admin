@@ -71,6 +71,13 @@
                                 <span class="inline-block text-14 font-semibold text-gray_1 group-hover:text-primary cursor-pointer">Medical Records</span>
                             </a>
                         </li>
+                        <li class="w-full relative group">
+                            <a [routerLink]="'event'" routerLinkActive="sidebar_link"
+                                class="nav_link">
+                                <span class="icon-event text-lg xl:text-xl text-gray_1 group-hover:text-primary"></span>
+                                <span class="inline-block text-14 font-semibold text-gray_1 group-hover:text-primary cursor-pointer">Event</span>
+                            </a>
+                        </li>
                         <!-- <li *ngFor="let menu of displayMainMenu"
                             [ngClass]="menu.isOpen ? calculateHeight(menu) : 'h-[52px]'"
                             class="relative overflow-hidden w-full anim">

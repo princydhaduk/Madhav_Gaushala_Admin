@@ -1,1 +1,85 @@
-<p>medical-records works!</p>
+<div class="w-full bg-white border border-slate_2 rounded-2xl">
+    <div class="flex flex-wrap items-center sm:-mx-3 p-4">
+        <div class="w-full sm:w-1/2 2xl:w-full 2xl:max-w-[435px] py-1 xl:py-2 p-0 sm:p-3">
+            <div class="w-full flex items-center bg-white py-1.5 xl:py-2.5 p-3 border border-slate_2 rounded-xl">
+                <label for="search" class="flex items-center justify-center cursor-pointer text-gray_1 font-semibold mr-3"><span class="icon-search text-20 text-gray_1"></span></label>
+                <input type="search" name="search" id="search" class="w-full bg-transparent text-14 font-medium outline-none placeholder:text-base" placeholder="Search..." 
+                (keyup)="onKeySearch($event)">
+            </div>
+        </div>
+        <div class="w-full xs:w-1/2 2xl:w-full 2xl:max-w-[262px] py-1 xl:py-2 p-0 sm:p-3 ml-auto">
+            <button type="button" class="flex items-center justify-center btn-primary text-sm lg:text-base font-bold cursor-pointer w-full ml-auto xs:w-auto" (click)="addAdmin()">
+                <span class="icon-add text-20 xl:text-24 text-inherit"></span>
+                <span class="block text-inherit ml-3 whitespace-nowrap">Add Medical Record</span>
+            </button>
+        </div>
+    </div>
+    <div class="flex flex-wrap mt-4 xl:mt-6">
+        <div class="w-full relative">
+            <div class="w-full relative overflow-hidden">
+                <div class="border-t border-gray_3 overflow-x-auto relative">
+                    <table mat-table matSort [dataSource]="medicalData" class="table_border table_border_t mat-elevation-z8">
+                        <ng-container matColumnDef="cow_id">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap text-center"> Cow Id </th>
+                            <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold"> {{element.name}} </td>
+                        </ng-container>
+                          
+                        <ng-container matColumnDef="record_type">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Record Type </th>
+                            <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold"> {{element.mobile ? element?.country_code + " " + element.mobile : '-'}} </td>
+                        </ng-container>
+  
+                        <ng-container matColumnDef="date">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Date </th>
+                            <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold"> {{element.email ? element.email : '-'}} </td>
+                        </ng-container>
+  
+                         <ng-container matColumnDef="veterinarian">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Veterinarian </th>
+                            <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold"> {{element.roleid?.name ? element.roleid?.name : '-'}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Status </th>
+                            <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">
+                                <p-inputSwitch [(ngModel)]="element.status" (click)="statusChangeAdmin(element)"></p-inputSwitch>
+                            </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Action </th>
+                            <td mat-cell *matCellDef="let element" class="whitespace-nowrap font-semibold">
+                                <div class="flex items-center space-x-5">
+                                    <span class="icon-edit block text-xl cursor-pointer text-dark anim" (click)="editAdmin(element)"></span>
+                                    <span class="block icon-delete text-xl cursor-pointer text-red anim" (click)="deleteAdmin(element)"></span>
+                                </div>
+                            </td>
+                        </ng-container>
+        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <div class="w-full"> 
+                        <div class="w-full flex justify-center p-5" *ngIf="medicalData.filteredData.length == 0">
+                            <div class="max-w-8xl w-full shadow-xl shadow-slate-100 rounded-2xl p-10 mx-auto bg-gray_2">
+                                <strong class="block text-xl lg:text-2xl 2xl:text-2xl text-center">No Medical Records Yet?</strong>
+                                <span class="block mx-auto w-full max-w-96 text-center pt-2.5">Start managing your Gaushala efficiently by adding cow details. Track health, treatments, and movement with ease.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full items-center flex-wrap data_paginator flex justify-end mt-[-226px] pt-[250px] pr-4 pb-4">
+                    <!-- <span class="inline-block text-14 font-medium text-dark">{{totaladminData}} of {{limit}} Of 2025</span> -->
+                    <p-paginator (onPageChange)="getAdminList($event)" [first]="1" [rows]="limit" [totalRecords]="10" [rowsPerPageOptions]="[10, 25, 50]"></p-paginator>
+                </div>
+                <div *ngIf="isTableLoading" class="absolute inset-0 w-full h-full flex items-center justify-center border border-t-0 border-gray_3 bg-gray-400/10 backdrop-blur-sm z-10">
+                    <div class="flex flex-col items-center justify-center">
+                        <div class="w-12 h-12 rounded-full animate-spin border-4 border-solid border-primary border-t-transparent"></div>
+                        <p class="block text-base font-medium pt-2">Please wait</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
