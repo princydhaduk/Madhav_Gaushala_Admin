@@ -71,7 +71,7 @@ export class CreatePasswordComponent implements OnInit{
       if (result && result.IsSuccess) {
         this.toastr.clear();
         this.toastr.success(result.Message, 'Success');
-        localStorage.setItem('accessToken', result.Data.accesstoken);
+        localStorage.setItem('accessToken', result.Data.accessToken);
         this._router.navigate(['/dashboard']);
         // this.location.back();
         if(typeof window != 'undefined'){

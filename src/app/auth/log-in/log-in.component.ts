@@ -72,22 +72,19 @@ export class LogInComponent {
   logIn(): void {
     localStorage.setItem('accessToken', 'princydhaduk');
     this._router.navigate(['dashboard']);
-
     // this.isBtnLoading = true;
     // if (!this.validate()) {
     //   this.isBtnLoading = false;
     //   return;
     // }
     // const loginDataObj: any = {
-    //   username: this.logInForm.value.username.toString(),
+    //   email: this.logInForm.value.username.toString(),
     //   password: this.logInForm.value.password
     // };
     // this.logInForm.disable();
     // this._authService.logIn(loginDataObj).subscribe((result: any) => {
     //   if (result && result.IsSuccess) {
-    //     localStorage.setItem('accessToken', result.Data.accesstoken);
-    //     localStorage.setItem('chID', window.btoa(result?.Data?.admindetails?.channelID));
-    //     localStorage.setItem('rolePermission', window.btoa(JSON.stringify(result?.Data?.admindetails?.roleid)));
+    //     localStorage.setItem('accessToken', result.Data.accessToken);
     //     this.toastr.success(result.Message, 'Success');
     //     this.isBtnLoading = false;
     //     this._router.navigate(['dashboard']);

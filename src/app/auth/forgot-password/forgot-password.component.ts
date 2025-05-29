@@ -39,7 +39,7 @@ export class ForgotPasswordComponent implements OnInit{
           localStorage.setItem('registerEmail',this.forgetPassword.value.email);
           localStorage.setItem('isForgetPin',JSON.stringify(true))
         }
-        // localStorage.setItem('accessToken', result.Data.accesstoken);
+        // localStorage.setItem('accessToken', result.Data.accessToken);
         this.toastr.clear();
         this.toastr.success(result.Message, 'Success');
         // if(this.isForgetPin){

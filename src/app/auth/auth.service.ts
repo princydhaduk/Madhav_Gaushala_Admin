@@ -27,7 +27,7 @@ export class AuthService {
     }
 
     logIn(credentials: any): Observable<any> {
-      return this._httpClient.post(CONSTANTS.appUrl + 'admin/login', credentials, this._globalFunction.getHeader());
+      return this._httpClient.post(CONSTANTS.appUrl + 'admin/auth/login', credentials, this._globalFunction.getHeader());
     }
 
     forgotPassword(credentials: any): Observable<any> {
